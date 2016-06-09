@@ -28,6 +28,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y openjdk-7-jre x11
 COPY JDownloader.jar /tmp/jd2/
 RUN java -jar /tmp/jd2/JDownloader.jar -norestart
 
+COPY install.sh /
+RUN chmod +x /install.sh
+RUN /install.sh
+
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
