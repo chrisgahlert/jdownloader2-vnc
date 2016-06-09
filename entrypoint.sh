@@ -11,7 +11,7 @@ useradd --shell /bin/bash -u $USER_ID -g jd2 -o -M -d /app jd2 || echo user jd2 
 
 export DISPLAY=:99
 killall Xvfb
-rm /tmp/.X99-lock
+rm -f /tmp/.X99-lock
 nohup Xvfb $DISPLAY -screen 0 ${WIDTH}x${HEIGHT}x16 &
 
 chown -R jd2:jd2 /app
