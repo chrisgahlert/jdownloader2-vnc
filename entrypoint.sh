@@ -5,7 +5,9 @@ if [ ! -f /app/JDownloader.jar ]; then
 fi
 
 export DISPLAY=:0
+export HOME=/app
 
+cd /app
 nohup Xvfb $DISPLAY -screen 0 ${WIDTH}x${HEIGHT}x16 &
 nohup x11vnc -loop -nevershared -display $DISPLAY -passwd "$PASSWORD" -forever -http &
 nohup matchbox-window-manager -display $DISPLAY -use_titlebar yes &
