@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ ! -f /app/JDownloader.jar ]; then
+    cp -R /tmp/jd2/* /app/
+fi
+
 nohup Xvfb :0 -screen 0 ${WIDTH}x${HEIGHT}x16 &
 nohup x11vnc -loop -nevershared -display :0 -passwd "$PASSWORD" -forever -http &
 chown -R $USER_ID:$GROUP_ID /app
