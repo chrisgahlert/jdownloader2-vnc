@@ -4,7 +4,9 @@ if [ ! -f /app/JDownloader.jar ]; then
     cp -R /tmp/jd2/* /app/
 fi
 
+groupdel jd2 || echo group jd2 does not exist
 groupadd -g $GROUP_ID -o jd2 || echo group jd2 already exists
+userdel jd2 || echo user jd2 does not exist
 useradd --shell /bin/bash -u $USER_ID -g jd2 -o -M -d /app jd2 || echo user jd2 already exists
 
 export DISPLAY=:99
