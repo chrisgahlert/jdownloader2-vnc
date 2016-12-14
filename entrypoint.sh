@@ -1,13 +1,14 @@
 #!/bin/sh
+set -e
 
 if [ ! -f /app/JDownloader.jar ]; then
     cp -R /tmp/jd2/* /app/
 fi
 
-groupdel jd2 || echo group jd2 does not exist
-groupadd -g $GROUP_ID -o jd2 || echo group jd2 already exists
-userdel jd2 || echo user jd2 does not exist
-useradd --shell /bin/bash -u $USER_ID -g jd2 -o -M -d /app jd2 || echo user jd2 already exists
+userdel jd2 2>&1 1>/dev/null || true
+groupdel jd2 2>&1 1>/dev/null || true
+groupadd -g $GROUP_ID -o jd2 || (echo group jd2 already exists && exit 1)
+useradd --shell /bin/bash -u $USER_ID -g jd2 -o -M -d /app jd2 || (echo user jd2 already exists && exit 1)
 
 export DISPLAY=:99
 killall Xvfb
