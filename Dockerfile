@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.4
+FROM ubuntu:14.04
 
 MAINTAINER chrisgahlert
 
@@ -23,9 +23,10 @@ RUN set -x \
     && gosu nobody true \
     && apt-get purge -y --auto-remove ca-certificates wget
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y openjdk-7-jre x11vnc Xvfb matchbox-window-manager
+RUN apt-get update && apt-get install -y phantomjs openjdk-7-jre x11vnc Xvfb matchbox-window-manager
 
 COPY JDownloader.jar /tmp/jd2/
+COPY cfg /tmp/jd2/cfg
 RUN java -jar /tmp/jd2/JDownloader.jar -norestart
 
 COPY install.sh /
