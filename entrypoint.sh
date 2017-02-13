@@ -11,6 +11,7 @@ rm -f /tmp/.X99-lock
 nohup Xvfb $DISPLAY -screen 0 ${WIDTH}x${HEIGHT}x16 &
 
 chown -R $USER_ID:$GROUP_ID /app
+chmod -R 755 /app
 cd /app
 
 exec /usr/local/bin/gosu $USER_ID:$GROUP_ID nohup x11vnc -loop -nevershared -display $DISPLAY -passwd "$PASSWORD" -forever -http &
